@@ -1,19 +1,19 @@
-// import { Selector } from 'testcafe';
+import { Selector } from 'testcafe';
 
-// const elementWithId = Selector(id =>{
-//     return document.getElementById(id);
-// });
+const elementWithId = Selector(id =>{
+    return document.getElementById(id);
+});
 
-// const persistenId = 'item-3';
+const persistenId = 'item-4';
 
-// const element = Selector(() => {
-//     return document.getElementById(persistenId);
-// }, {
-//     dependencies: { persistenId }
-// });
+const element = Selector(() => {
+    return document.getElementById(persistenId);
+}, {
+    dependencies: { persistenId }
+});
 
-// fixture `SELECTOR_SESSION`
-// .page `https://demoqa.com/text-box`
+fixture `SELECTOR_SESSION`
+.page `https://demoqa.com/text-box`
 // test
 // .skip
 // ('check state', async t=>{
@@ -76,7 +76,9 @@
 //     let iconstyle = await iconElement.getStyleProperty('color')
 //     console.log('icon color: ' + iconstyle);
 // });
-// test('Check for the presence of child elements', async t => {
+// test
+// .skip
+// ('Check for the presence of child elements', async t => {
 //     const parentElement = Selector('#item-1');
 
 //     const childElementCount = await parentElement.find('#tree-node').count;
@@ -89,14 +91,17 @@
 //         console.log('The element does not have any child elements.');
 //     }
 // });
-import { Selector } from 'testcafe';
+ 
+test
+('right click', async t =>{
+    const itemBoxClicked = Selector('#item-4');
+    const rightClick = Selector ('#rightClickBtn');
+    const mess = Selector('#rightClickMessage');
 
-fixture`Selector.count`
-    .page`http://devexpress.github.io/testcafe/example/`;
-
-test('Check count of the columns', async t => {
-    const osCount = Selector('.column.col-2 label').count;
-
-    await t.expect(osCount).eql(3);
-    console.log(osCount)
-});
+    await t
+    .click(itemBoxClicked)
+    .rightClick(rightClick)
+    let messRight = await mess.innerText
+    console.log(messRight);
+    
+} )
